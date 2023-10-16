@@ -33,6 +33,7 @@ def text_export(result):
     """
     exports results to a text file, one url per line
     """
+    final=""
     with open(mem.var['text_file'], 'a+', encoding='utf8') as text_file:
         for url, data in result.items():
             clean_url = url.lstrip('/')
@@ -44,8 +45,11 @@ def text_export(result):
                     query_string = query_string.replace('?', '&', 1)
                 if data['method'] == 'GET':
                     text_file.write(clean_url + query_string + '\n')
+                    final=clean_url + query_string
                 elif data['method'] == 'POST':
                     text_file.write(clean_url + '\t' + query_string + '\n')
+                    final=clean_url + query_string
+        print(final)
 
 def exporter(result):
     """
